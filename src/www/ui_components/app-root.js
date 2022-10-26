@@ -518,7 +518,9 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
       },
       servers: {
         type: Array,
-        value: localStorage.getItem('outline-servers') ? JSON.parse(localStorage.getItem('outline-servers')) : []
+        value: localStorage.getItem('outline-servers-list')
+          ? JSON.parse(localStorage.getItem('outline-servers-list'))
+          : [],
       },
       // Tells AppLocalizeBehavior to bubble its
       // app-localize-resources-loaded event, allowing us listen for it on
@@ -715,6 +717,10 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
   }
 
   _computeShouldShowBackButton(page, DEFAULT_PAGE) {
+    if (page === 'servers-list') {
+      return false;
+    }
+
     return page !== DEFAULT_PAGE;
   }
 
@@ -771,10 +777,10 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
     });
   }
 
-  _onLoginSuccess(e){
+  _onLoginSuccess(e) {
     this.set('routeData.page', 'servers');
-    if(e.detail){
-      this.set('servers', e.detail)
+    if (e.detail) {
+      this.set('servers', e.detail);
     }
   }
 }

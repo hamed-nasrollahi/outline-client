@@ -38,7 +38,7 @@ class LoginPage extends DirMixin(PolymerElement) {
           margin: 0 auto;
         }
 
-        .buttons-wrapper{
+        .buttons-wrapper {
           margin-top: 16px;
         }
 
@@ -46,53 +46,74 @@ class LoginPage extends DirMixin(PolymerElement) {
           text-decoration: none;
           color: inherit;
         }
-        
+
         .error-message {
           color: red;
           margin-top: 16px;
           max-width: fit-content;
         }
+
+        paper-button {
+          color: #2fbca4;
+        }
       </style>
 
       <div id="main">
         <paper-input
+          id="userNameInput"
+          required
           class="shadow"
           label="[[localize('label-username')]]"
           value="{{_userName}}"
+          error-message="Required"
+          auto-validate
         ></paper-input>
 
         <paper-input
+          required
           id="accessKeyInput"
           class="shadow"
           label="[[localize('label-password')]]"
           value="{{_password}}"
+          error-message="Required"
+          auto-validate
         ></paper-input>
 
         <div class="buttons-wrapper">
-          <paper-button required auto-validate on-tap="_onLoginClick">[[localize('button-login')]]</paper-button>
+          <paper-button on-tap="_onLoginClick">[[localize('button-login')]]</paper-button>
 
           <a class="sign-up" href="https://cryptanica.com/signup">
-            <paper-button required auto-validate on-tap="_ignoreDetectedServer">[[localize('button-signup')]]</paper-button>
+            <paper-button>[[localize('button-signup')]]</paper-button>
           </a>
         </div>
 
-        <template is="dom-if" if=[[_error]]>
+        <template is="dom-if" if="[[_error]]">
           <div class="error-message">
-            username or password is not correct. if you are not signed up please use the link below and signup first <a href="https://cryptanica.com/signup">signup</a>.
-            if you already signed up check your subscription to be valid on web site control panel <a href="https://cryptanica.com/index.php/membership-account/">control panel</a>
+            username or password is not correct. if you are not signed up please use the link below and signup first
+            <a href="https://cryptanica.com/signup">signup</a>. if you already signed up check your subscription to be
+            valid on web site control panel
+            <a href="https://cryptanica.com/index.php/membership-account/">control panel</a>
           </div>
         </template>
 
         <iron-ajax
-          id="ajax"
+          id="serverList"
           url="http://3.126.163.92:5000/v1/GetAvailableServers"
           method="POST"
           body="[[_getBody(_userName, _password)]]"
           on-response="_onLoginSucess"
-          last-error="{{_error}}">
+          last-error="{{_error}}"
+        >
         </iron-ajax>
-     
 
+        <iron-ajax
+          id="healthCheck"
+          url="http://3.126.163.92:5000/v1/HealthCheck"
+          method="GET"
+          on-response="_onHealthCheckSuccess"
+          on-error="_onHealthCheckError"
+        >
+        </iron-ajax>
       </div>
     `;
   }
@@ -105,15 +126,34 @@ class LoginPage extends DirMixin(PolymerElement) {
     return {
       _userName: String,
       _password: String,
-      _error: Object
+      _error: Object,
     };
   }
 
   _onLoginClick() {
-    this.$.ajax.generateRequest();
+    let bPsw = this.$.accessKeyInput.validate();
+    let bName = this.$.userNameInput.validate();
+
+    if (bPsw && bName) {
+      this.$.healthCheck.generateRequest();
+    }
   }
 
-  _getBody(username, password){
+  _onHealthCheckSuccess() {
+    let listAjax = this.$.serverList;
+
+    listAjax.set('url', 'http://3.126.163.92:5000/v1/GetAvailableServers');
+    listAjax.generateRequest();
+  }
+
+  _onHealthCheckError() {
+    let listAjax = this.$.serverList;
+
+    listAjax.set('url', 'http://api.cryptanica.com/v1/GetAvailableServers');
+    listAjax.generateRequest();
+  }
+
+  _getBody(username, password) {
     const formData = new FormData();
 
     formData.append('UserName', username);
@@ -122,17 +162,15 @@ class LoginPage extends DirMixin(PolymerElement) {
     return formData;
   }
 
-  _onLoginSucess(){
+  _onLoginSucess() {
     this._storeDataInLocal();
-
-    const params = {bubbles: true, composed: true, detail: this.$.ajax.lastResponse};
+    const params = {bubbles: true, composed: true, detail: this.$.serverList.lastResponse};
     this.dispatchEvent(new CustomEvent('login-sucessfully', params));
   }
 
-  _storeDataInLocal(){
+  _storeDataInLocal() {
     localStorage.setItem('outline-user', JSON.stringify({username: this._userName, password: btoa(this._password)}));
-    localStorage.setItem('outline-servers', JSON.stringify(this.$.ajax.lastResponse))
+    localStorage.setItem('outline-servers-list', JSON.stringify(this.$.serverList.lastResponse));
   }
-
 }
 customElements.define(LoginPage.is, LoginPage);
