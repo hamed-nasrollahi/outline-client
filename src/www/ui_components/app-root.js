@@ -689,13 +689,13 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
   }
 
   _computePage(pageFromRoute, DEFAULT_PAGE) {
-    if (this.page && pageFromRoute === this.page) {
+    if ((this.page && pageFromRoute === this.page)) {
       return this.page;
     } else if (pageFromRoute === 'help') {
       this._openHelpPage(); // Fall-through to navigate to the default page.
     } else if (pageFromRoute === 'quit') {
       this.fire('QuitPressed');
-    } else if (pageFromRoute) {
+    } else if (pageFromRoute && localStorage.getItem('outline-user')) {
       return pageFromRoute;
     }
     // No page found in the route (i.e. the url hash) means we are just starting up.
@@ -717,7 +717,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
   }
 
   _computeShouldShowBackButton(page, DEFAULT_PAGE) {
-    if (page === 'servers-list') {
+    if (page === 'servers') {
       return false;
     }
 

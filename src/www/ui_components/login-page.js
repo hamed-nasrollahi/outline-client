@@ -71,6 +71,7 @@ class LoginPage extends DirMixin(PolymerElement) {
 
         <paper-input
           required
+          type="password"
           id="accessKeyInput"
           class="shadow"
           label="[[localize('label-password')]]"

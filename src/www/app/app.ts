@@ -561,8 +561,7 @@ export class App {
   }
 
   private syncServersToUI() {
-    let servers = localStorage.getItem('outline-servers-list') ? JSON.parse(localStorage.getItem('outline-servers-list')) : this.serverRepo.getAll();
-    this.rootEl.servers = servers.map(this.makeServerListItem.bind(this));
+    this.rootEl.servers = this.serverRepo.getAll().map(this.makeServerListItem.bind(this));
   }
 
   private syncConnectivityStateToServerCards() {
