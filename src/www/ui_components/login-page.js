@@ -171,7 +171,6 @@ class LoginPage extends DirMixin(PolymerElement) {
 
   _storeDataInLocal() {
     localStorage.setItem('outline-user', JSON.stringify({username: this._userName, password: btoa(this._password)}));
-    localStorage.setItem('outline-servers-list', JSON.stringify(this.$.serverList.lastResponse));
   }
 }
 customElements.define(LoginPage.is, LoginPage);
