@@ -296,7 +296,12 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
             root-path="[[rootPath]]"
           ></licenses-view>
 
-          <login-page name="login" localize="[[localize]]" on-login-sucessfully="_onLoginSuccess"></login-page>
+          <login-page
+            id="loginPage"
+            name="login"
+            localize="[[localize]]"
+            on-login-sucessfully="_onLoginSuccess"
+          ></login-page>
         </iron-pages>
       </app-header-layout>
 
@@ -500,6 +505,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
         type: String,
         readonly: true,
         computed: '_computePage(routeData.page, DEFAULT_PAGE)',
+        observer: '_onPageChanged',
       },
       route: Object,
       routeData: Object,
@@ -785,6 +791,13 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
   _computeUseAltAccessMessage(language) {
     // Hack to show an alternative message
     return language === 'fa' && this.platform !== 'ios' && this.platform !== 'osx';
+
+  }
+  
+  _onPageChanged() {
+    if (this.page === 'servers') {
+      this.$.loginPage.fetchServerList();
+    }
   }
 }
 customElements.define(AppRoot.is, AppRoot);

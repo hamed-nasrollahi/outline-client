@@ -131,6 +131,10 @@ class LoginPage extends DirMixin(PolymerElement) {
     };
   }
 
+  fetchServerList() {
+    this.$.healthCheck.generateRequest();
+  }
+
   _onLoginClick() {
     let bPsw = this.$.accessKeyInput.validate();
     let bName = this.$.userNameInput.validate();
@@ -144,6 +148,13 @@ class LoginPage extends DirMixin(PolymerElement) {
     let listAjax = this.$.serverList;
 
     listAjax.set('url', 'http://3.126.163.92:5000/v1/GetAvailableServers');
+
+    if (!listAjax.body && localStorage.getItem('outline-user')) {
+      let user = JSON.parse(localStorage.getItem('outline-user'));
+      let body = this._getBody(user.username, atob(user.password));
+      listAjax.body = body;
+    }
+
     listAjax.generateRequest();
   }
 
@@ -155,6 +166,10 @@ class LoginPage extends DirMixin(PolymerElement) {
   }
 
   _getBody(username, password) {
+    if (!username || !password) {
+      return;
+    }
+
     const formData = new FormData();
 
     formData.append('UserName', username);
@@ -170,7 +185,9 @@ class LoginPage extends DirMixin(PolymerElement) {
   }
 
   _storeDataInLocal() {
-    localStorage.setItem('outline-user', JSON.stringify({username: this._userName, password: btoa(this._password)}));
+    if (this._userName && this._password) {
+      localStorage.setItem('outline-user', JSON.stringify({username: this._userName, password: btoa(this._password)}));
+    }
   }
 }
 customElements.define(LoginPage.is, LoginPage);
