@@ -272,7 +272,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
         </app-header>
 
         <iron-pages id="pages" selected="[[page]]" attr-for-selected="name">
-          <servers-view name="servers" id="serversView" servers="[[servers]]" localize="[[localize]]"></servers-view>
+          <servers-view name="servers" id="serversView" servers="[[servers]]" localize="[[localize]]" use-alt-access-message="[[useAltAccessMessage]]""></servers-view>
           <feedback-view name="feedback" id="feedbackView" localize="[[localize]]"></feedback-view>
           <about-view
             name="about"
@@ -392,7 +392,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
         <a hidden="" id="toastUrl" href="[[toastUrl]]"></a>
       </paper-toast>
 
-      <add-server-view id="addServerView" localize="[[localize]]"></add-server-view>
+      <add-server-view id="addServerView" localize="[[localize]]" use-alt-access-message="[[useAltAccessMessage]]"></add-server-view>
 
       <!-- Modal dialogs must be placed outside of app-header-layout, see
     https://github.com/PolymerElements/paper-dialog/issues/152 and
@@ -542,6 +542,10 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
       },
       toastUrl: {
         type: String,
+      },
+      useAltAccessMessage: {
+        type: Boolean,
+        computed: '_computeUseAltAccessMessage(language)',
       },
     };
   }
@@ -776,6 +780,11 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
 
   _onLoginSuccess(e) {
     this.set('routeData.page', 'servers');
+  }
+
+  _computeUseAltAccessMessage(language) {
+    // Hack to show an alternative message
+    return language === 'fa' && this.platform !== 'ios' && this.platform !== 'osx';
   }
 }
 customElements.define(AppRoot.is, AppRoot);
