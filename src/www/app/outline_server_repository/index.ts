@@ -122,6 +122,7 @@ export class OutlineServerRepository implements ServerRepository {
     this.serverById.set(server.id, server);
     this.storeServers();
     this.eventQueue.enqueue(new events.ServerAdded(server));
+    return server.id;
   }
 
   rename(serverId: string, newName: string) {

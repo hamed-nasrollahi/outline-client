@@ -95,7 +95,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
         }
 
         app-toolbar img {
-          height: 19px;
+          height: 36px;
           margin-top: 2px;
         }
 
@@ -156,7 +156,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
         }
 
         #logo {
-          width: 60px;
+          width: 240px;
           height: 60px;
           margin-top: 30px;
         }
@@ -225,7 +225,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
             height: 180px;
           }
           #logo {
-            width: 68px;
+            width: 240px;
             height: 68px;
             margin-top: 56px;
           }
@@ -296,7 +296,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
             root-path="[[rootPath]]"
           ></licenses-view>
 
-          <login-page name="login" localize="[[localize]]" on-login-sucessfully="_onLoginSuccess"></login-page>
+          <login-page name="login" id="login" localize="[[localize]]" on-login-sucessfully="_onLoginSuccess"></login-page>
         </iron-pages>
       </app-header-layout>
 
@@ -342,8 +342,12 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
           </div>
           <hr class="nav-hr" />
           <paper-listbox id="drawer-nav" selected="{{routeData.page}}" attr-for-selected="name" on-tap="closeDrawer">
+            <paper-icon-item name="login">
+              <iron-icon icon="account-circle" slot="item-icon"></iron-icon>
+              <span class="item-label">[[localize('login-menu-item')]]</span>
+            </paper-icon-item>
             <paper-icon-item name="servers">
-              <iron-icon icon="outline-icons:outline" slot="item-icon"></iron-icon>
+              <iron-icon icon="cloud-circle" slot="item-icon"></iron-icon>
               <span class="item-label">[[localize('servers-menu-item')]]</span>
             </paper-icon-item>
             <paper-icon-item name="feedback">
@@ -355,7 +359,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
               [[localize('about-page-title')]]
             </paper-icon-item>
             <paper-icon-item name="help">
-              <a href="https://s3.amazonaws.com/outline-vpn/index.html#/support" id="helpAnchor" hidden=""></a>
+              <a href="https://cryptanica.com/support" id="helpAnchor" hidden=""></a>
               <iron-icon icon="help" slot="item-icon"></iron-icon>
               [[localize('help-page-title')]]
             </paper-icon-item>
@@ -368,20 +372,17 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
               [[localize('quit')]]
             </paper-icon-item>
             <paper-item class="border-top">
-              <a href="https://www.google.com/policies/privacy/">[[localize('privacy')]]</a>
+              <a href="https://cryptanica.com/privacy/">[[localize('privacy')]]</a>
             </paper-item>
             <paper-item>
-              <a href="https://s3.amazonaws.com/outline-vpn/index.html#/en/support/dataCollection"
+              <a href="https://cryptanica.com/dataCollection"
                 >[[localize('data-collection')]]</a
               >
             </paper-item>
             <paper-item>
-              <a href="https://s3.amazonaws.com/outline-vpn/static_downloads/Outline-Terms-of-Service.html"
+              <a href="https://cryptanica.com/tos"
                 >[[localize('terms')]]</a
               >
-            </paper-item>
-            <paper-item name="licenses">
-              <span>[[localize('licenses-page-title')]]</span>
             </paper-item>
           </paper-listbox>
         </div>
@@ -415,7 +416,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
       DEFAULT_PAGE: {
         type: String,
         readonly: true,
-        value: localStorage.getItem('outline-user') ? 'servers' : 'login',
+        value: localStorage.getItem('cryptanica-user') ? 'servers' : 'login',
       },
       DEFAULT_LANGUAGE: {
         type: String,
@@ -598,6 +599,10 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
       // Don't use cordova?.platformId, ReferenceError will be thrown
       this.platform = cordova.platformId;
     }
+
+    if (localStorage.getItem('cryptanica-user')) {
+      this.$.login._onLoginClick();
+    }
   }
 
   setLanguage(languageCode) {
@@ -696,7 +701,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
       this._openHelpPage(); // Fall-through to navigate to the default page.
     } else if (pageFromRoute === 'quit') {
       this.fire('QuitPressed');
-    } else if (pageFromRoute && localStorage.getItem('outline-user')) {
+    } else if (pageFromRoute && localStorage.getItem('cryptanica-user')) {
       return pageFromRoute;
     }
     // No page found in the route (i.e. the url hash) means we are just starting up.
@@ -779,6 +784,7 @@ export class AppRoot extends mixinBehaviors([AppLocalizeBehavior], PolymerElemen
   }
 
   _onLoginSuccess(e) {
+    this.fire('AddServersFromLogin', {apiServerList: e.detail});
     this.set('routeData.page', 'servers');
   }
 

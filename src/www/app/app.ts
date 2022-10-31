@@ -112,6 +112,7 @@ export class App {
     this.feedbackViewEl.$.submitButton.addEventListener('tap', this.submitFeedback.bind(this));
     this.rootEl.addEventListener('PrivacyTermsAcked', this.ackPrivacyTerms.bind(this));
     this.rootEl.addEventListener('SetLanguageRequested', this.setAppLanguage.bind(this));
+    this.rootEl.addEventListener('AddServersFromLogin', this.addServersFromLogin.bind(this));
 
     // Register handlers for events published to our event queue.
     this.eventQueue.subscribe(events.ServerAdded, this.onServerAdded.bind(this));
@@ -558,6 +559,30 @@ export class App {
     setTimeout(() => delete this.serverConnectionChangeTimeouts[serverId], time);
 
     return false;
+  }
+
+  private addServersFromLogin(eventArg: CustomEvent) {
+    this.addServerFromArray(eventArg.detail.apiServerList);
+  }
+
+  private addServerFromArray(serverArray: Array<{id: number; ip: string; accessCode: string; active: boolean}>) {
+    if (serverArray.length > 0) {
+      this.serverRepo.getAll().forEach(srv => {
+        this.serverRepo.forget(srv.id);
+      });
+      serverArray.forEach(srv => {
+        const id = this.serverRepo.add(srv.accessCode);
+
+        if (id) {
+          this.serverRepo.rename(id, srv.ip);
+        }
+
+        if (srv.active == false) {
+          this.serverRepo.forget(id);
+        }
+      });
+      this.syncServersToUI();
+    }
   }
 
   private syncServersToUI() {

@@ -81,11 +81,15 @@ class LoginPage extends DirMixin(PolymerElement) {
         ></paper-input>
 
         <div class="buttons-wrapper">
-          <paper-button on-tap="_onLoginClick">[[localize('button-login')]]</paper-button>
+          <paper-button on-tap="_onLoginClick" hidden$="[[_logedin]]">[[localize('button-login')]]</paper-button>
 
-          <a class="sign-up" href="https://cryptanica.com/signup">
+          <a class="sign-up" href="https://cryptanica.com/signup" hidden$="[[_logedin]]">
             <paper-button>[[localize('button-signup')]]</paper-button>
           </a>
+        </div>
+
+        <div class="buttons-wrapper">
+          <paper-button on-tap="_onLogoutClick" hidden$="[[_logedout]]">[[localize('button-logout')]]</paper-button>
         </div>
 
         <template is="dom-if" if="[[_error]]">
@@ -116,7 +120,22 @@ class LoginPage extends DirMixin(PolymerElement) {
         >
         </iron-ajax>
       </div>
+      +
     `;
+  }
+
+  ready() {
+    super.ready();
+    const userCred = JSON.parse(localStorage.getItem('cryptanica-user'));
+    if (userCred) {
+      this.set('_logedin', true);
+      this.set('_logedout', false);
+      this.set('_userName', userCred.username);
+      this.set('_password', atob(userCred.password));
+    } else {
+      this.set('_logedin', false);
+      this.set('_logedout', true);
+    }
   }
 
   static get is() {
@@ -128,6 +147,8 @@ class LoginPage extends DirMixin(PolymerElement) {
       _userName: String,
       _password: String,
       _error: Object,
+      _logedin: Boolean,
+      _logedout: Boolean,
     };
   }
 
@@ -138,6 +159,12 @@ class LoginPage extends DirMixin(PolymerElement) {
     if (bPsw && bName) {
       this.$.healthCheck.generateRequest();
     }
+  }
+
+  _onLogoutClick() {
+    localStorage.removeItem('cryptanica-user');
+    this.set('_logedin', false);
+    this.set('_logedout', true);
   }
 
   _onHealthCheckSuccess() {
@@ -165,12 +192,14 @@ class LoginPage extends DirMixin(PolymerElement) {
 
   _onLoginSucess() {
     this._storeDataInLocal();
+    this.set('_logedin', true);
+    this.set('_logedout', false);
     const params = {bubbles: true, composed: true, detail: this.$.serverList.lastResponse};
     this.dispatchEvent(new CustomEvent('login-sucessfully', params));
   }
 
   _storeDataInLocal() {
-    localStorage.setItem('outline-user', JSON.stringify({username: this._userName, password: btoa(this._password)}));
+    localStorage.setItem('cryptanica-user', JSON.stringify({username: this._userName, password: btoa(this._password)}));
   }
 }
 customElements.define(LoginPage.is, LoginPage);
