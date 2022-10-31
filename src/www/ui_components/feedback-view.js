@@ -100,7 +100,7 @@ Polymer({
 
         <p
           class="info"
-          inner-h-t-m-l="[[localize('feedback-privacy', 'privacyPolicyLinkOpen', '<a href=https://cryptanica.com/dataCollection>', 'privacyPolicyLinkClose', '</a>')]]"
+          inner-h-t-m-l="[[localize('feedback-privacy', 'privacyPolicyLinkOpen', '<a href="https://cryptanica.com/dataCollection">', 'privacyPolicyLinkClose', '</a>')]]"
         ></p>
       </div>
       <div class="card-actions">

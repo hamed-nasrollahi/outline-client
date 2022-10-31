@@ -159,7 +159,7 @@ export class App {
       // Fall through to `error-unexpected` for other platforms.
       messageKey = 'outline-plugin-error-antivirus';
       buttonKey = 'fix-this';
-      buttonLink = 'https://s3.amazonaws.com/outline-vpn/index.html#/en/support/antivirusBlock';
+      buttonLink = 'https://cryptannica.com/antivirusBlock';
     } else if (e instanceof errors.ConfigureSystemProxyFailure) {
       messageKey = 'outline-plugin-error-routing-tables';
       buttonKey = 'feedback-page-title';
