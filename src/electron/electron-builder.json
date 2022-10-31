@@ -1,7 +1,7 @@
 {
   "files": ["build/electron", "www", "resources/tray", "!node_modules/electron"],
   "asarUnpack": ["third_party", "tools"],
-  "artifactName": "Outline-Client.${ext}",
+  "artifactName": "Cryptanica-Client.${ext}",
   "directories": {
     "output": "build/dist"
   },
