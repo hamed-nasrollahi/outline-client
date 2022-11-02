@@ -103,7 +103,7 @@ class LoginPage extends DirMixin(PolymerElement) {
 
         <iron-ajax
           id="serverList"
-          url="https://cryptanica.com/wp-json/mo/v1/ActiveServers/1"
+          url="https://3.126.163.92:5000/v1/GetAvailableServers"
           method="POST"
           body="[[_getBody(_userName, _password)]]"
           on-response="_onLoginSucess"
@@ -113,7 +113,7 @@ class LoginPage extends DirMixin(PolymerElement) {
 
         <iron-ajax
           id="healthCheck"
-          url="https://cryptanica.com/wp-json/mo/v1/HealthCheck/1"
+          url="https://3.126.163.92:5000/v1/HealthCheck"
           method="GET"
           on-response="_onHealthCheckSuccess"
           on-error="_onHealthCheckError"
@@ -170,14 +170,14 @@ class LoginPage extends DirMixin(PolymerElement) {
   _onHealthCheckSuccess() {
     let listAjax = this.$.serverList;
 
-    listAjax.set('url', 'https://cryptanica.com/wp-json/mo/v1/ActiveServers/1');
+    listAjax.set('url', 'https://3.126.163.92:5000/v1/GetAvailableServers');
     listAjax.generateRequest();
   }
 
   _onHealthCheckError() {
     let listAjax = this.$.serverList;
 
-    listAjax.set('url', 'http://api.cryptanica.com/v1/GetAvailableServers');
+    listAjax.set('url', 'https://api.cryptanica.com/v1/GetAvailableServers');
     listAjax.generateRequest();
   }
 
