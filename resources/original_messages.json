@@ -4,8 +4,8 @@
     "description": "The text for a button to close the current page or dialog."
   },
   "servers_page_title": {
-    "message": "Outline",
-    "description": "The title of the main page of the application, showing the application's title (Outline). Outline is the product name and can be found in the translation glossary."
+    "message": "cryptanica",
+    "description": "The title of the main page of the application, showing the application's title (cryptanica). cryptanica is the product name and can be found in the translation glossary."
   },
   "servers_menu_item": {
     "message": "Servers",
@@ -56,7 +56,7 @@
     "description": "This is one of the feedback categories the user can select in a drop-down when sending a feedback to the app developers. This is for feedback related to not being able to import a server into the application."
   },
   "feedback_performance": {
-    "message": "Outline is slow",
+    "message": "cryptanica is slow",
     "description": "This is one of the feedback categories the user can select in a drop-down when sending a feedback to the app developers. This is for performance feedback, for example, the speed of connection."
   },
   "feedback_suggestion": {
@@ -76,8 +76,8 @@
     "description": "Text displayed below a feedback form explaining that the support team can only respond to feedback in English."
   },
   "feedback_privacy": {
-    "message": "Your feedback, your email address (if provided), and additional information referred to in the $START_OF_LINK$Data Collection Policy$END_OF_LINK$ will be sent to the Outline team. Please do not include personal information in your feedback.",
-    "description": "Text appearing above a feedback form explaining the feedback process. Includes a link to the Data Collection Policy as marked by the start and end of link. Outline is the product name and can be found in the translation glossary.",
+    "message": "Your feedback, your email address (if provided), and additional information referred to in the $START_OF_LINK$Data Collection Policy$END_OF_LINK$ will be sent to the cryptanica team. Please do not include personal information in your feedback.",
+    "description": "Text appearing above a feedback form explaining the feedback process. Includes a link to the Data Collection Policy as marked by the start and end of link. cryptanica is the product name and can be found in the translation glossary.",
     "placeholders": {
       "END_OF_LINK": {
         "content": "{privacyPolicyLinkClose}"
@@ -100,8 +100,8 @@
     "description": "Status text showing that a form is progress of being submitted."
   },
   "about_outline": {
-    "message": "Outline is a product by $JIGSAW$ that lets anyone create, run, and share access to their own VPN. Outline is designed to be resistant to blocking. Visit $GETOUTLINE$ to learn how to get started.$NEW_LINE$$NEW_LINE$Outline is open source software powered by $SHADOWSOCKS$. You can contribute to the code on $GITHUB$ and join the conversation on $REDDIT$.",
-    "description": "The contents of the About page of the app. Outline is the product name and can be found in the translation glossary.",
+    "message": "cryptanica is a product by $JIGSAW$ that lets anyone create, run, and share access to their own VPN. cryptanica is designed to be resistant to blocking. Visit $GETOUTLINE$ to learn how to get started.$NEW_LINE$$NEW_LINE$Outline is open source software powered by $SHADOWSOCKS$. You can contribute to the code on $GITHUB$ and join the conversation on $REDDIT$.",
+    "description": "The contents of the About page of the app. cryptanica is the product name and can be found in the translation glossary.",
     "placeholders": {
       "GITHUB": {
         "content": "<a href={gitHubUrl}>GitHub</a>"
@@ -113,7 +113,7 @@
         "content": "<br>"
       },
       "GETOUTLINE": {
-        "content": "<a href={outlineUrl}>getoutline.org</a>"
+        "content": "<a href={outlineUrl}>cryptanica.com</a>"
       },
       "REDDIT": {
         "content": "<a href={redditUrl}>Reddit</a>"
@@ -226,8 +226,8 @@
     "description": "This is the default name for an added server when the type or name is not specified by the access key."
   },
   "server_default_name_outline": {
-    "message": "Outline Server",
-    "description": "The default name for a server when adding a new server to the application. Outline is the product name and can be found in the translation glossary."
+    "message": "cryptanica Server",
+    "description": "The default name for a server when adding a new server to the application. cryptanica is the product name and can be found in the translation glossary."
   },
   "server_detected": {
     "message": "Please confirm that you want to add this server.",
@@ -264,7 +264,7 @@
     "placeholders": {
       "SERVER_NAME": {
         "content": "{serverName}",
-        "example": "My Outline Server"
+        "example": "My cryptanica Server"
       }
     }
   },
@@ -274,7 +274,7 @@
     "placeholders": {
       "SERVER_NAME": {
         "content": "{serverName}",
-        "example": "My Outline Server"
+        "example": "My cryptanica Server"
       }
     }
   },
@@ -284,7 +284,7 @@
     "placeholders": {
       "SERVER_NAME": {
         "content": "{serverName}",
-        "example": "My Outline Server"
+        "example": "My cryptanica Server"
       }
     }
   },
@@ -306,7 +306,7 @@
     "placeholders": {
       "SERVER_NAME": {
         "content": "{serverName}",
-        "example": "My Outline Server"
+        "example": "My cryptanica Server"
       }
     }
   },
@@ -316,7 +316,7 @@
     "placeholders": {
       "SERVER_NAME": {
         "content": "{serverName}",
-        "example": "My Outline Server"
+        "example": "My cryptanica Server"
       }
     }
   },
@@ -352,8 +352,8 @@
     "description": "An error message that indicates the access key provided is not correct."
   },
   "error_server_incompatible": {
-    "message": "Sorry, this access key is not compatible with this version of Outline.",
-    "description": "Error message shown when the provided access key isn't compatible the user's version of the application. Outline is the product name and can be found in the translation glossary."
+    "message": "Sorry, this access key is not compatible with this version of cryptanica.",
+    "description": "Error message shown when the provided access key isn't compatible the user's version of the application. cryptanica is the product name and can be found in the translation glossary."
   },
   "error_server_already_added": {
     "message": "Server “$SERVER_NAME$” already added.",
@@ -361,7 +361,7 @@
     "placeholders": {
       "SERVER_NAME": {
         "content": "{serverName}",
-        "example": "My Outline Server"
+        "example": "My cryptanica Server"
       }
     }
   },
@@ -380,8 +380,8 @@
     "description": "An error message shown when the user is trying to send feedback to the application developers but it is failing."
   },
   "outline_plugin_error_vpn_permission_not_granted": {
-    "message": "Outline needs your permission to set up a VPN connection to the server. Please try again, or submit feedback if you need help.",
-    "description": "An error message shown when the application does not have the proper operating system permission to create a VPN connection. Outline is the product name and can be found in the translation glossary."
+    "message": "cryptanica needs your permission to set up a VPN connection to the server. Please try again, or submit feedback if you need help.",
+    "description": "An error message shown when the application does not have the proper operating system permission to create a VPN connection. cryptanica is the product name and can be found in the translation glossary."
   },
   "outline_plugin_error_invalid_server_credentials": {
     "message": "It seems like your access key is not valid. If this happens again, please contact your server admin.",
@@ -396,7 +396,7 @@
     "description": "An error message shown when the user tries to connect to a server that cannot be reached for some reason."
   },
   "outline_plugin_error_admin_permissions": {
-    "message": "Outline needs admin permissions in order to be initialized. If you don't have admin permissions, please try again after restarting your computer or ask your system administrator for help.",
+    "message": "cryptanica needs admin permissions in order to be initialized. If you don't have admin permissions, please try again after restarting your computer or ask your system administrator for help.",
     "description": "An error message when the application is not granted administrator permissions."
   },
   "outline_plugin_error_routing_tables": {
@@ -412,24 +412,24 @@
     "description": "An error message when the application fails to connect due to another active VPN."
   },
   "outline_plugin_error_system_configuration": {
-    "message": "Sorry, it looks like Outline is not properly installed. Please try installing it again. If that doesn't work, please submit feedback through the app.",
+    "message": "Sorry, it looks like cryptanica is not properly installed. Please try installing it again. If that doesn't work, please submit feedback through the app.",
     "description": "Error message shown when the application cannot connect because the installer could not configure the system or because changes have been made to the system which can only be corrected by running the installer again."
   },
   "outline_services_installation_confirmation": {
-    "message": "We will initialize Outline, which may require admin permissions. Would you like to proceed?",
-    "desciption": "A prompt message asking for permission whether Outline is allowed to install backend services, because that requires administrative permission."
+    "message": "We will initialize cryptanica, which may require admin permissions. Would you like to proceed?",
+    "desciption": "A prompt message asking for permission whether cryptanica is allowed to install backend services, because that requires administrative permission."
   },
   "outline_services_installation_failed": {
-    "message": "Unfortunately we are not able to initialize Outline, please submit feedback through the app.",
-    "desciption": "An error message shown when the user tries to install Outline backend services but failed for some reason."
+    "message": "Unfortunately we are not able to initialize cryptanica, please submit feedback through the app.",
+    "desciption": "An error message shown when the user tries to install cryptanica backend services but failed for some reason."
   },
   "outline_services_installed": {
-    "message": "Outline has been successfully initialized, please try again to connect to the server.",
-    "desciption": "An information message shown when the Outline successfully installed all backend services, and we ask the user try to reconnect to the server."
+    "message": "cryptanica has been successfully initialized, please try again to connect to the server.",
+    "desciption": "An information message shown when the cryptanica successfully installed all backend services, and we ask the user try to reconnect to the server."
   },
   "outline_services_installing": {
-    "message": "Initializing Outline...",
-    "desciption": "An information message indicating Outline is installing all its backend services."
+    "message": "Initializing cryptanica...",
+    "desciption": "An information message indicating cryptanica is installing all its backend services."
   },
   "fix_this": {
     "message": "Fix this",
@@ -441,19 +441,19 @@
   },
   "auto_connect_dialog_title": {
     "message": "Stay protected, always",
-    "description": "The title of a message to the user that tells them Outline will keep connected unless explicitly told to disconnect. Outline is the product name and can be found in the translation glossary."
+    "description": "The title of a message to the user that tells them cryptanica will keep connected unless explicitly told to disconnect. cryptanica is the product name and can be found in the translation glossary."
   },
   "auto_connect_dialog_detail": {
-    "message": "Unless you disconnect from your Outline server, Outline will automatically connect next time you restart your device.",
-    "description": "An explanation of the connection behavior of the app. Outline is the product name and can be found in the translation glossary."
+    "message": "Unless you disconnect from your cryptanica server, cryptanica will automatically connect next time you restart your device.",
+    "description": "An explanation of the connection behavior of the app. cryptanica is the product name and can be found in the translation glossary."
   },
   "non_system_vpn_warning_title": {
     "message": "Verify your browser connection",
     "description": "Title of a dialog that advises the user to check their internet browser's VPN connection."
   },
   "non_system_vpn_warning_detail": {
-    "message": "Most browsers connect automatically with Outline, some do not.",
-    "description": "Further explanation message that the user needs to verify that their browser is connected through Outline. Outline is the product name and can be found in the translation glossary."
+    "message": "Most browsers connect automatically with cryptanica, some do not.",
+    "description": "Further explanation message that the user needs to verify that their browser is connected through cryptanica. cryptanica is the product name and can be found in the translation glossary."
   },
   "get_help": {
     "message": "Get help",
@@ -472,12 +472,12 @@
     "description": "The text on a button to cancel the current operation."
   },
   "update_downloaded": {
-    "message": "An updated version of Outline has been downloaded. It will be installed when you restart Outline.",
-    "description": "A message shown to the user to notify them about a new downloaded version. Outline is the product name and can be found in the translation glossary."
+    "message": "An updated version of cryptanica has been downloaded. It will be installed when you restart cryptanica.",
+    "description": "A message shown to the user to notify them about a new downloaded version. cryptanica is the product name and can be found in the translation glossary."
   },
   "privacy_title": {
-    "message": "Outline will never collect your personal information",
-    "description": "The title of a information page about user privacy. Outline is the product name and can be found in the translation glossary."
+    "message": "cryptanica will never collect your personal information",
+    "description": "The title of a information page about user privacy. cryptanica is the product name and can be found in the translation glossary."
   },
   "privacy_text": {
     "message": "Some technical information is sent if you submit feedback, if there’s an app error or crash, or if your server administrator opts in to share anonymous server usage data.",
