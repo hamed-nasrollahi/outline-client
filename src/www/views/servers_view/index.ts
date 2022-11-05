@@ -106,13 +106,13 @@ Polymer({
           <template is="dom-if" if="[[!useAltAccessMessage]]">
             <div
               class="footer subtle"
-              inner-h-t-m-l="[[localize('server-create-your-own-zero-state', 'breakLine', '<br/>', 'openLink', '<a href="https://cryptanica.com">', 'closeLink', '</a>')]]"
+              inner-h-t-m-l="[[localize('server-create-your-own-zero-state', 'breakLine', '<br/>', 'openLink', '<a href=https://cryptanica.com>', 'closeLink', '</a>')]]"
             ></div>
           </template>
           <template is="dom-if" if="[[useAltAccessMessage]]">
             <div
               class="footer subtle"
-              inner-h-t-m-l="[[localize('server-create-your-own-zero-state-access', 'breakLine', '<br/>', 'openLink', '<a href="https://cryptanica.com">', 'openLink2', '<a href="https://cryptanica.com">', 'closeLink', '</a>')]]"
+              inner-h-t-m-l="[[localize('server-create-your-own-zero-state-access', 'breakLine', '<br/>', 'openLink', '<a href=https://cryptanica.com>', 'openLink2', '<a href=https://cryptanica.com>', 'closeLink', '</a>')]]"
             ></div>
           </template>
         </div>

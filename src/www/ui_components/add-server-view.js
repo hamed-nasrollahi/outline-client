@@ -166,13 +166,13 @@ Polymer({
         <template is="dom-if" if="[[shouldShowNormalAccessMessage]]">
           <div
             id="addServerFooter"
-            inner-h-t-m-l="[[localize('server-create-your-own', 'breakLine', '<br/>', 'openLink', '<a href="https://cryptanica.com">', 'closeLink', '</a>')]]"
+            inner-h-t-m-l="[[localize('server-create-your-own', 'breakLine', '<br/>', 'openLink', '<a href=https://cryptanica.com>', 'closeLink', '</a>')]]"
           ></div>
         </template>
         <template is="dom-if" if="[[shouldShowAltAccessMessage]]">
           <div
             id="addServerFooterAlt"
-            inner-h-t-m-l="[[localize('server-create-your-own-access', 'breakLine', '<br/>', 'openLink', '<a href="https://cryptanica.com">', 'openLink2', '<a href="https://cryptanica.com">', 'closeLink', '</a>')]]"
+            inner-h-t-m-l="[[localize('server-create-your-own-access', 'breakLine', '<br/>', 'openLink', '<a href=https://cryptanica.com>', 'openLink2', '<a href=https://cryptanica.com>', 'closeLink', '</a>')]]"
           ></div>
         </template>
         <template is="dom-if" if="[[invalidAccessKeyInput]]">
