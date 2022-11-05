@@ -567,18 +567,26 @@ export class App {
 
   private addServerFromArray(serverArray: Array<{id: number; ip: string; accessCode: string; active: boolean}>) {
     if (serverArray.length > 0) {
-      this.serverRepo.getAll().forEach(srv => {
-        this.serverRepo.forget(srv.id);
-      });
       serverArray.forEach(srv => {
-        const id = this.serverRepo.add(srv.accessCode);
+        const match = this.serverRepo.getAll().find(srvRepoItem => {
+          if (srvRepoItem.name == srv.ip) {
+            return true;
+          }
+          return false;
+        });
+        console.log(match);
+        if (match) {
+          if (srv.active == false) {
+            this.serverRepo.forget(match.id);
+          }
+        } else {
+          if (srv.active == true) {
+            const id = this.serverRepo.add(srv.accessCode);
 
-        if (id) {
-          this.serverRepo.rename(id, srv.ip);
-        }
-
-        if (srv.active == false) {
-          this.serverRepo.forget(id);
+            if (id) {
+              this.serverRepo.rename(id, srv.ip);
+            }
+          }
         }
       });
       this.syncServersToUI();
