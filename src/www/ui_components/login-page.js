@@ -103,7 +103,7 @@ class LoginPage extends DirMixin(PolymerElement) {
 
         <iron-ajax
           id="serverList"
-          url="http://3.126.163.92:5000/v1/GetAvailableServers"
+          url="[[_s1_servers]]"
           method="POST"
           body="[[_getBody(_userName, _password)]]"
           on-response="_onLoginSucess"
@@ -113,10 +113,29 @@ class LoginPage extends DirMixin(PolymerElement) {
 
         <iron-ajax
           id="healthCheck"
-          url="http://3.126.163.92:5000/v1/HealthCheck"
+          url="[[_s1_health]]"
           method="GET"
           on-response="_onHealthCheckSuccess"
           on-error="_onHealthCheckError"
+        >
+        </iron-ajax>
+
+        <iron-ajax
+          id="serverList2"
+          url="[[_s2_servers]]"
+          method="POST"
+          body="[[_getBody(_userName, _password)]]"
+          on-response="_onLoginSucess2"
+          last-error="{{_error}}"
+        >
+        </iron-ajax>
+
+        <iron-ajax
+          id="healthCheck2"
+          url="[[_s2_health]]"
+          method="GET"
+          on-response="_onHealthCheckSuccess2"
+          on-error="_onHealthCheckError2"
         >
         </iron-ajax>
       </div>
@@ -136,6 +155,17 @@ class LoginPage extends DirMixin(PolymerElement) {
       this.set('_logedin', false);
       this.set('_logedout', true);
     }
+    const _aws_s1_health = 'https://3pba7p3v65.execute-api.eu-central-1.amazonaws.com/v1/HealthCheck';
+    const _aws_s1_servers = 'https://nhgbx7kfra.execute-api.eu-central-1.amazonaws.com/v1/GetAvailableServers';
+
+    this.set('_s1_health', _aws_s1_health);
+    this.set('_s1_servers', _aws_s1_servers);
+
+    const _aws_s2_health = 'https://p349di34ec.execute-api.eu-central-1.amazonaws.com/v1/HealthCheck';
+    const _aws_s2_servers = 'https://n3bdrhvkhc.execute-api.eu-central-1.amazonaws.com/v1/GetAvailableServers';
+
+    this.set('_s2_health', _aws_s2_health);
+    this.set('_s2_servers', _aws_s2_servers);
   }
 
   static get is() {
@@ -149,6 +179,10 @@ class LoginPage extends DirMixin(PolymerElement) {
       _error: Object,
       _logedin: Boolean,
       _logedout: Boolean,
+      _s1_health: String,
+      _s2_health: String,
+      _s1_servers: String,
+      _s2_servers: String,
     };
   }
 
@@ -169,17 +203,20 @@ class LoginPage extends DirMixin(PolymerElement) {
 
   _onHealthCheckSuccess() {
     let listAjax = this.$.serverList;
-
-    listAjax.set('url', 'http://3.126.163.92:5000/v1/GetAvailableServers');
     listAjax.generateRequest();
   }
 
   _onHealthCheckError() {
-    let listAjax = this.$.serverList;
-
-    listAjax.set('url', 'https://api.cryptanica.com/v1/GetAvailableServers');
+    let listAjax = this.$.healthCheck2;
     listAjax.generateRequest();
   }
+
+  _onHealthCheckSuccess2() {
+    let listAjax = this.$.serverList;
+    listAjax.generateRequest();
+  }
+
+  _onHealthCheckError2() {}
 
   _getBody(username, password) {
     const formData = new FormData();
@@ -195,6 +232,14 @@ class LoginPage extends DirMixin(PolymerElement) {
     this.set('_logedin', true);
     this.set('_logedout', false);
     const params = {bubbles: true, composed: true, detail: this.$.serverList.lastResponse};
+    this.dispatchEvent(new CustomEvent('login-sucessfully', params));
+  }
+
+  _onLoginSucess2() {
+    this._storeDataInLocal();
+    this.set('_logedin', true);
+    this.set('_logedout', false);
+    const params = {bubbles: true, composed: true, detail: this.$.serverList2.lastResponse};
     this.dispatchEvent(new CustomEvent('login-sucessfully', params));
   }
 
