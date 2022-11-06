@@ -47,7 +47,6 @@
       </receiver>
 
       <meta-data android:name="io.sentry.auto-init" android:value="false" />
-      <meta-data android:name="usesCleartextTraffic" android:value="true" />
     </config-file>
 
     <hook type="before_plugin_install" src="android/scripts/copy_third_party.js" />
@@ -72,6 +71,7 @@
 
     <resource-file src="android/resources/small_icon.png" target="res/drawable/small_icon.png" />
     <resource-file src="android/resources/bypass_subnets.xml" target="res/values/bypass_subnets.xml" />
+    <resource-file src="android/resources/network_security_config.xml" target="res/xml/network_security_config.xml" />
     <resource-file src="android/resources/strings/" target="res/" />
 
     <framework src="android/java/build-extras.gradle" custom="true"
