@@ -39,7 +39,6 @@
   "language-page-title": "Select a language",
   "learn-more": "Learn more",
   "licenses-page-title": "Licences",
-  "login-menu-item": "Login/Logout",
   "non-system-vpn-warning-detail": "Most, but not all, browsers connect automatically with Cryptanica",
   "non-system-vpn-warning-title": "Verify your browser connection",
   "outline-plugin-error-admin-permissions": "Cryptanica needs admin permissions in order to be initialised. If you don't have admin permissions, please try again after restarting your computer or ask your system administrator for help.",
@@ -96,6 +95,7 @@
   "login-page-title": "Login",
   "label-username": "Username",
   "label-password": "Password",
+  "login-menu-item": "Login/Logout",
   "button-login": "Login",
   "button-logout": "Logout",
   "button-signup": "Sign up"
