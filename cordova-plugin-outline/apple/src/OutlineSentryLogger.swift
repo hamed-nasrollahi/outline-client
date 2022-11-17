@@ -23,9 +23,9 @@ class OutlineSentryLogger: DDAbstractLogger {
   static let sharedInstance = OutlineSentryLogger()
 
 #if os(macOS)
-  private static let kAppGroup = "VCR4H5MABA.org.outline.macos.client"
+  private static let kAppGroup = "VCR4H5MABA.org.cryptanica.macos.client"
 #else
-  private static let kAppGroup = "group.org.outline.ios.client"
+  private static let kAppGroup = "group.org.cryptanica.ios.client"
 #endif
   private static let kDateFormat = "yyyy/MM/dd HH:mm:ss:SSS"
   private static let kDatePattern = "[0-9]{4}/[0-9]{2}/[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}:[0-9]{3}"

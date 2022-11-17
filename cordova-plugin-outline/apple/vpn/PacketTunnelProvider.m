@@ -51,9 +51,9 @@ static NSDictionary *kVpnSubnetCandidates;  // Subnets to bind the VPN.
 - (id)init {
   self = [super init];
 #if TARGET_OS_IPHONE
-  NSString *appGroup = @"group.org.outline.ios.client";
+  NSString *appGroup = @"group.org.cryptanica.ios.client";
 #else
-  NSString *appGroup = @"VCR4H5MABA.org.outline.macos.client";
+  NSString *appGroup = @"VCR4H5MABA.org.cryptanica.macos.client";
 #endif
   NSURL *containerUrl = [[NSFileManager defaultManager]
                          containerURLForSecurityApplicationGroupIdentifier:appGroup];
@@ -80,7 +80,7 @@ static NSDictionary *kVpnSubnetCandidates;  // Subnets to bind the VPN.
     @"169" : @"169.254.19.0"
   };
 
-  _packetQueue = dispatch_queue_create("org.outline.ios.packetqueue", DISPATCH_QUEUE_SERIAL);
+  _packetQueue = dispatch_queue_create("org.cryptanica.ios.packetqueue", DISPATCH_QUEUE_SERIAL);
 
   return self;
 }
@@ -91,8 +91,8 @@ static NSDictionary *kVpnSubnetCandidates;  // Subnets to bind the VPN.
   if (options == nil) {
     DDLogWarn(@"Received a connect request from preferences");
     NSString *msg = NSLocalizedStringWithDefaultValue(
-        @"vpn-connect", @"Outline", [NSBundle mainBundle],
-        @"Please use the Outline app to connect.",
+        @"vpn-connect", @"cryptanica", [NSBundle mainBundle],
+        @"Please use the cryptanica app to connect.",
         @"Message shown in a system dialog when the user attempts to connect from settings");
     [self displayMessage:msg
         completionHandler:^(BOOL success) {
