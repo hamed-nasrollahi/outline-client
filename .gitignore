@@ -9,6 +9,7 @@ info.txt
 /www
 /third_party/Potatso/Pods
 /third_party/**/Carthage/Checkouts/
+/third_party/**/Carthage/Build/
 xcuserdata/
 .vs/
 obj/
@@ -24,4 +25,3 @@ Outline.apk
 Outline.apks
 universal.apk
 toc.pb
-package-lock.json
