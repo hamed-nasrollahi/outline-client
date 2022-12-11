@@ -110,7 +110,7 @@ function setupTray(): void {
   tray.on('click', () => {
     mainWindow?.show();
   });
-  tray.setToolTip('Outline');
+  tray.setToolTip('Cryptanica');
   updateTray(TunnelStatus.DISCONNECTED);
 }
 
