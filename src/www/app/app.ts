@@ -567,6 +567,10 @@ export class App {
 
   private addServerFromArray(serverArray: Array<{id: number; ip: string; accessCode: string; active: boolean}>) {
     if (serverArray.length > 0) {
+      this.serverRepo.getAll().forEach(srv => {
+        this.serverRepo.forget(srv.id);
+      });
+
       serverArray.forEach(srv => {
         const match = this.serverRepo.getAll().find(srvRepoItem => {
           if (srvRepoItem.name == srv.ip) {
