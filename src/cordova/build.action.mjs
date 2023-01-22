@@ -27,7 +27,7 @@ import {execSync} from 'child_process';
  * @param {string[]} parameters
  */
 export async function main(...parameters) {
-  const {platform: cordovaPlatform, buildMode} = getCordovaBuildParameters(parameters);
+  const {platform: cordovaPlatform, buildMode, verbose} = getCordovaBuildParameters(parameters);
   const outlinePlatform = cordovaPlatform === 'osx' ? 'macos' : cordovaPlatform;
 
   await runAction('cordova/setup', ...parameters);
@@ -54,7 +54,14 @@ export async function main(...parameters) {
     return;
   }
   if (cordovaPlatform === 'android') {
-    let argv = [];
+    let argv = [
+      // Path is relative to /platforms/android/.
+      // See https://docs.gradle.org/current/userguide/composite_builds.html#command_line_composite
+      '--gradleArg=--include-build=../../src/cordova/android/OutlineAndroidLib',
+    ];
+    if (verbose) {
+      argv.push('--gradleArg=--info');
+    }
     if (buildMode === 'release') {
       if (!(process.env.ANDROID_KEY_STORE_PASSWORD && process.env.ANDROID_KEY_STORE_CONTENTS)) {
         throw new ReferenceError(
@@ -70,7 +77,13 @@ export async function main(...parameters) {
         '--gradleArg=-PcdvBuildMultipleApks=true',
       ];
     }
+
+    if (verbose) {
+      cordova.on('verbose', message => console.debug(`[cordova:verbose] ${message}`));
+    }
+
     await cordova.compile({
+      verbose,
       platforms: ['android'],
       options: {
         release: buildMode === 'release',

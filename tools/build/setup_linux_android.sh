@@ -16,6 +16,8 @@
 
 set -eu
 
+source "$(dirname "$0")/android_tools_versions.sh" || exit
+
 # Since the command-line Android development tools are poorly
 # documented, these steps are cobbled together from lots of
 # trial and error, old pinball machine parts, and various
@@ -26,28 +28,21 @@ set -eu
 # Download Android Command Line Tools:
 #   https://developer.android.com/studio/command-line
 # This is version 2.1.
-ANDROID_SDK_ROOT=${ANDROID_SDK_ROOT:-"/opt/android-sdk"}
-
-# Android SDK Build Tools:
-#   https://developer.android.com/studio/releases/build-tools.html
-# To find the latest version's label:
-#   sdkmanager --list|grep build-tools
-ANDROID_BUILD_TOOLS_VERSION=${ANDROID_BUILD_TOOLS_VERSION:-"30.0.3"}
-
-# NDK (side by side) version must be kept in sync with the default build tools NDK version.
-NDK_VERSION=${NDK_VERSION:-"21.0.6113669"}
+ANDROID_HOME=${ANDROID_HOME:-"/opt/android-sdk"}
 
 cd /opt
 
+# android commandlinetools download location found on this webpage: https://developer.android.com/studio#command-line-tools-only
+# TODO(daniellacosse): upgrade the cli version
 wget \
   -q https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip \
   -O android-commandline-tools.zip
 
-mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools
-unzip -q android-commandline-tools.zip -d ${ANDROID_SDK_ROOT}/cmdline-tools
+mkdir -p ${ANDROID_HOME}/cmdline-tools
+unzip -q android-commandline-tools.zip -d ${ANDROID_HOME}/cmdline-tools
 
 rm android-commandline-tools.zip
 
-PATH="${PATH}:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin"
+PATH="${PATH}:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools/tools/bin"
 
-yes | sdkmanager "build-tools;${ANDROID_BUILD_TOOLS_VERSION}" "ndk;${NDK_VERSION}"
+yes | sdkmanager "build-tools;${OUTLINE_ANDROID_BUILD_TOOLS_VERSION}" "ndk;${OUTLINE_ANDROID_NDK_VERSION}"

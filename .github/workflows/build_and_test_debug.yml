@@ -138,8 +138,6 @@ jobs:
     runs-on: ubuntu-20.04
     timeout-minutes: 10
     needs: web_test
-    env:
-      ANDROID_SDK_ROOT: /opt/android-sdk
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
@@ -156,10 +154,10 @@ jobs:
       - name: Install Java
         uses: actions/setup-java@v1.4.3
         with:
-          java-version: 1.8
+          java-version: 11
 
       - name: Setup Android
         run: bash ./tools/build/setup_linux_android.sh
 
       - name: Build Android Client
-        run: npm run action cordova/build android
+        run: npm run action cordova/build android -- --verbose
